@@ -27,9 +27,11 @@
 
 @section Scripts {
     <script type="text/javascript">
-        let difficulty = "@Common.Difficuty.Begginer.ToString()"
+        let difficulty = "@Common.Difficulty.Begginer.ToString()"
         let playMode = "@Common.PlayMode.PlayerVComputer.ToString()"
-        let lastMove = "";
+
+        let lastMoveP1 = "";
+        let lastMoveP2 = "";
 
         $("#newGame").click(function (event) {
             difficulty = $("#difficulty").val();
@@ -41,9 +43,10 @@
             $.ajax({
                 url: "@Url.Action("MakeMove", "Home")",
                 type: "POST",
-                data: { lastMove: lastMove, difficulty: difficulty, playMode: playMode },
+                data: { lastMoveP1: lastMoveP1, lastMoveP2: lastMoveP2, difficulty: difficulty, playMode: playMode },
                 success: function (response) {
-
+                    lastMoveP1 = response.p1Move;
+                    lastMoveP2 = response.p2Move;
                 }
             })
         });

@@ -1,6 +1,6 @@
 ﻿@{
     var selectDifficulty = new List<SelectListItem>();
-    foreach (Common.Difficuty difficulty in Enum.GetValues(typeof(Common.Difficuty)))
+    foreach (Common.Difficulty difficulty in Enum.GetValues(typeof(Common.Difficulty)))
     {
         selectDifficulty.Add(new SelectListItem(difficulty.ToString(), difficulty.ToString()));
     }
