@@ -1,6 +1,4 @@
-﻿
-
-<div class="card">
+﻿<div class="card">
     <div class="card-header">
         <div class="card-header-tabs">
             <ul class="nav nav-tabs" role="tablist">
@@ -29,8 +27,25 @@
 
 @section Scripts {
     <script type="text/javascript">
+        let difficulty = "@Common.Difficuty.Begginer.ToString()"
+        let playMode = "@Common.PlayMode.PlayerVComputer.ToString()"
+        let lastMove = "";
+
         $("#newGame").click(function (event) {
-            this.innerHTML = this.innerHTML + "+";
+            difficulty = $("#difficulty").val();
+            playMode = $("#playMode").val();
+            toastr.success("Difficult Changed");
+        });
+
+        $("#makeMove").click(function (event) {
+            $.ajax({
+                url: "@Url.Action("MakeMove", "Home")",
+                type: "POST",
+                data: { lastMove: lastMove, difficulty: difficulty, playMode: playMode },
+                success: function (response) {
+
+                }
+            })
         });
     </script>
 }

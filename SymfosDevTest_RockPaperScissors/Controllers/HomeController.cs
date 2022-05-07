@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Common;
 
 namespace SymfosDevTest_RockPaperScissors.Controllers
 {
@@ -23,9 +24,10 @@ namespace SymfosDevTest_RockPaperScissors.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public async Task<JsonResult> MakeMove(string lastMove, string difficulty, string playMode)
         {
-            return View();
+            return Json(new { });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

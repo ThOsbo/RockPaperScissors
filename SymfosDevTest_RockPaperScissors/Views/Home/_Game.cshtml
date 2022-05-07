@@ -1,34 +1,50 @@
-﻿<div class="row">
-    <div class="col">
-        <button id="newGame" class="btn btn-info" type="button">Start New Game</button>
-    </div>    
+﻿@{
+    var selectDifficulty = new List<SelectListItem>();
+    foreach (Common.Difficuty difficulty in Enum.GetValues(typeof(Common.Difficuty)))
+    {
+        selectDifficulty.Add(new SelectListItem(difficulty.ToString(), difficulty.ToString()));
+    }
 
-    <div class="input-group col">
-        <label for="#selectPlayMode" class="m-1">Select Play Mode:</label>
-        <select id="selectPlayMode" name="playMode">
-            <option>Player V Computer</option>
-            <option>Computer V Computer</option>
-        </select>
+    var selectPlayMode = new List<SelectListItem>();
+    foreach (Common.PlayMode playMode in Enum.GetValues(typeof(Common.PlayMode)))
+    {
+        selectPlayMode.Add(new SelectListItem(playMode.ToString(), playMode.ToString()));
+    }
+}
+
+<div class="row">
+    <div class="col">
+        <button id="newGame" class="btn btn-info" type="submit">Start New Game</button>
     </div>
 
     <div class="input-group col">
         <label for="#difficulty" class="m-1">Select Difficulty:</label>
-        <select id="difficulty" name="difficulty">
-            <option>Begginer</option>
-            <option>Intermediate</option>
-            <option>Advanced</option>
-        </select>
+        @Html.DropDownList("difficulty", selectDifficulty)
     </div>
 
+    <div class="input-group col">
+        <label for="#playMode" class="m-1">Select Play Mode:</label>
+        @Html.DropDownList("playMode", selectPlayMode)
+    </div>
+</div>
+
+<hr />
+
+<div class="text-center">
+    <p>Wins: <span id="winNum">0</span> Draws: <span id="drawNum">0</span> Losses: <span id="lossNum">0</span></p>
 </div>
 
 <hr />
 
 <div class="row">
     <div class="col">
-        <p>Player</p>
+        <p class="text-center">Player 1</p>
     </div>
     <div class="col">
-        <p>Computer</p>
+        <p class="text-center">Player 2</p>
     </div>
 </div>
+
+<hr />
+
+<button id="makeMove" class="btn btn-success" type="button">Play Game</button>
