@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-    public enum Difficuty
+    public enum Difficulty
     {
         Begginer,
         Intermediate,
@@ -24,4 +24,25 @@ namespace Common
         Paper,
         Scissors
     }
+
+    public class Enum
+    {
+        public static T GetEnum<T>(string value)
+        {
+            //Converts a string to an enum
+            T enumValue = default(T);
+
+            foreach (T item in System.Enum.GetValues(typeof(T)))
+            {
+                if (item.ToString() == value)
+                {
+                    enumValue = item;
+                    break;
+                }
+            }
+
+            return enumValue;
+        }
+    }
+    
 }
