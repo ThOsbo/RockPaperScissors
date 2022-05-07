@@ -13,18 +13,24 @@
             </ul>
         </div>
     </div>
-    
+
     <div class="card-body">
         <div class="tab-content">
             <div id="game" class="tab-pane fade active show">
-                <h3>GAME</h3>
                 @Html.Partial("_Game")
             </div>
 
             <div id="rules" class="tab-pane fade">
-                <h3>RULES</h3>
                 @Html.Partial("_Rules")
             </div>
         </div>
-    </div>    
+    </div>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $("#newGame").click(function (event) {
+            this.innerHTML = this.innerHTML + "+";
+        });
+    </script>
+}
