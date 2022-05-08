@@ -18,7 +18,7 @@ namespace SymfosDevTest_RockPaperScissors
             {
                 switch (difficultyEnumValue)
                 {
-                    case Common.Difficulty.Begginer:
+                    case Common.Difficulty.Beginner:
                         move = MakeBegginerMove(lastMoveEnumValue);
                         break;
                     case Common.Difficulty.Intermediate:
