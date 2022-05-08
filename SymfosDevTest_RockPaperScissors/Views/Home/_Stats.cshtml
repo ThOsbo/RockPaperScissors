@@ -1,0 +1,44 @@
+﻿<h3 class="card-text">Statistics - Current Session</h3>
+
+@foreach (Common.Difficulty difficulty in Enum.GetValues(typeof(Common.Difficulty)))
+{
+    <h4>Difficulty: @difficulty.ToString()</h4>
+
+    <div class="row">
+        @foreach (Common.PlayMode playMode in Enum.GetValues(typeof(Common.PlayMode)))
+        {
+            <div class="col">
+                <h5>@playMode.ToString()</h5>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            @foreach (Common.Moves move in Enum.GetValues(typeof(Common.Moves)))
+                            {
+                                <td>@move.ToString()</td>
+                            }
+                        </tr>
+                        @foreach (Common.Moves move in Enum.GetValues(typeof(Common.Moves)))
+                        {
+                            <tr>
+                                <td>@move.ToString()</td>
+                                @foreach (Common.Moves lastMove in Enum.GetValues(typeof(Common.Moves)))
+                                {
+                                    if (move == lastMove)
+                                    {
+                                        <td>N/A</td>
+                                    }
+                                    else
+                                    { 
+                                        <td></td>
+                                    }
+                                }
+                            </tr>
+                        }
+                    </thead>
+                </table>
+            </div>
+        }
+    </div>
+    <hr />
+}

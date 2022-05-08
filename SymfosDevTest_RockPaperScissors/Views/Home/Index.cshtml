@@ -8,6 +8,9 @@
                 <li class="nav-item">
                     <a href="#rules" class="nav-link" data-toggle="tab" role="tab" aria-controls="rules" aria-selected="false">Rules</a>
                 </li>
+                <li class="nav-item">
+                    <a href="#stats" class="nav-link" data-toggle="tab" role="tab" aria-controls="stats" aria-selected="false">Stats</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -20,6 +23,10 @@
 
             <div id="rules" class="tab-pane fade">
                 @Html.Partial("_Rules")
+            </div>
+
+            <div id="stats" class="tab-pane fade">
+                @Html.Partial("_Stats")
             </div>
         </div>
     </div>
