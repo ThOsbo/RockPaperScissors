@@ -39,6 +39,22 @@
         $("#newGame").click(function (event) {
             difficulty = $("#difficulty").val();
             playMode = $("#playMode").val();
+
+            if (playMode === "@Common.PlayMode.PlayerVComputer.ToString()") {
+                $("#playerSelect").removeClass("invisible");
+                $("#playerSelect").addClass("visible");
+            }
+            else {
+                $("#playerSelect").removeClass("visible");
+                $("#playerSelect").addClass("invisible");
+            }
+
+            $("#currPlayMode").html(playMode.toString());
+            $("#currDifficulty").html(difficulty.toString());
+
+            $("#winNum").html("0");
+            $("#drawNum").html("0");
+            $("#lossNum").html("0");
         });
 
         $("#select-@Common.Moves.Rock.ToString()").click(function (event) {
