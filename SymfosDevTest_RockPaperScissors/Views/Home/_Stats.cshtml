@@ -17,9 +17,9 @@
                             <td colspan="3">Last Move P2</td>
                         </tr>
                         <tr>
-                            @foreach (Common.Moves move in Enum.GetValues(typeof(Common.Moves)))
+                            @foreach (Common.Moves lastMove in Enum.GetValues(typeof(Common.Moves)))
                             {
-                                <td>@move.ToString()</td>
+                                <td>@lastMove.ToString()</td>
                             }
                         </tr>
                         @foreach (Common.Moves move in Enum.GetValues(typeof(Common.Moves)))
