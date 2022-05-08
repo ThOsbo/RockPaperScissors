@@ -117,22 +117,57 @@ namespace SymfosDevTest_RockPaperScissors
 
         private static string MakeAdvancedMove(Common.Moves lastMove, int gamesPlayed)
         {
+            /*
+             * Strategy:
+             * Makes the same move as the opponents last move for two turns
+             * then on the third move choses the move that will lose to the opponents last move.
+             * Every fourth turn makes a random move.
+             */
+
             string moveToReturn;
 
-            switch (lastMove)
+            if (gamesPlayed % 4 == 0)
             {
-                case Common.Moves.Rock:
-                    moveToReturn = "";
-                    break;
-                case Common.Moves.Paper:
-                    moveToReturn = "";
-                    break;
-                case Common.Moves.Scissors:
-                    moveToReturn = "";
-                    break;
-                default:
-                    moveToReturn = MakeRandomMove();
-                    break;
+                moveToReturn = MakeRandomMove();
+            }
+            else
+            {
+                switch (lastMove)
+                {
+                    case Common.Moves.Rock:
+                        if (gamesPlayed % 3 < 2)
+                        {
+                            moveToReturn = Common.Moves.Rock.ToString();
+                        }
+                        else
+                        {
+                            moveToReturn = Common.Moves.Scissors.ToString();
+                        }
+                        break;
+                    case Common.Moves.Paper:
+                        if (gamesPlayed % 3 < 2)
+                        {
+                            moveToReturn = Common.Moves.Paper.ToString();
+                        }
+                        else
+                        {
+                            moveToReturn = Common.Moves.Rock.ToString();
+                        }
+                        break;
+                    case Common.Moves.Scissors:
+                        if (gamesPlayed % 3 < 2)
+                        {
+                            moveToReturn = Common.Moves.Scissors.ToString();
+                        }
+                        else
+                        {
+                            moveToReturn = Common.Moves.Paper.ToString();
+                        }
+                        break;
+                    default:
+                        moveToReturn = MakeRandomMove();
+                        break;
+                }
             }
 
             return moveToReturn;
