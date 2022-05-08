@@ -27,6 +27,7 @@ namespace Common
 
     public enum Result
     {
+        Undecided,
         Win,
         Draw,
         Loss

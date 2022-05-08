@@ -36,7 +36,7 @@
         let selectedMoveP1 = "";
         let selectedMoveP2 = "";
 
-        let matchResult = "";
+        let matchResult = "@Common.Result.Undecided.ToString()";
 
         let winNum = 0;
         let drawNum = 0;
@@ -66,14 +66,18 @@
             $("#drawNum").html("0");
             $("#lossNum").html("0");
 
-            $("#selectedMoveP1").html("");
-            $("#selectedMoveP2").html("");
-
             selectedMoveP1 = "";
             selectedMoveP2 = "";
 
+            $("#selectedMoveP1").html("");
+            $("#selectedMoveP2").html("");
+
             lastMoveP1 = "";
             lastMoveP2 = "";
+
+            matchResult = "@Common.Result.Undecided.ToString()";
+            $("#matchResult").html("@Common.Result.Undecided.ToString()");
+
         });
 
         $("#select-@Common.Moves.Rock.ToString()").click(function (event) {
