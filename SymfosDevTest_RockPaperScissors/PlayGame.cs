@@ -7,7 +7,7 @@ namespace SymfosDevTest_RockPaperScissors
 {
     public class PlayGame
     {
-        public static string MakeMove(string lastMove, string difficulty)
+        public static string MakeMove(string lastMove, int gamesPlayed, string difficulty)
         {
             string move = default(Common.Moves).ToString();
 
@@ -22,10 +22,10 @@ namespace SymfosDevTest_RockPaperScissors
                         move = MakeBegginerMove(lastMoveEnumValue);
                         break;
                     case Common.Difficulty.Intermediate:
-                        move = MakeIntermdeiateMove(lastMoveEnumValue);
+                        move = MakeIntermdeiateMove(lastMoveEnumValue, gamesPlayed);
                         break;
                     case Common.Difficulty.Advanced:
-                        move = MakeAdvancedMove(lastMoveEnumValue);
+                        move = MakeAdvancedMove(lastMoveEnumValue, gamesPlayed);
                         break;
                     default:
                         break;
@@ -48,17 +48,72 @@ namespace SymfosDevTest_RockPaperScissors
 
         private static string MakeBegginerMove(Common.Moves lastMove)
         {
-            return Common.Moves.Rock.ToString();
+            //Strategy: returns the move that would beat the last move.
+            string moveToReturn;
+
+            switch (lastMove)
+            {
+                case Common.Moves.Rock:
+                    moveToReturn = Common.Moves.Paper.ToString();
+                    break;
+                case Common.Moves.Paper:
+                    moveToReturn = Common.Moves.Scissors.ToString();
+                    break;
+                case Common.Moves.Scissors:
+                    moveToReturn = Common.Moves.Rock.ToString();
+                    break;
+                default:
+                    moveToReturn = MakeRandomMove();
+                    break;
+            }
+
+            return moveToReturn;
         }
 
-        private static string MakeIntermdeiateMove(Common.Moves lastMove)
+        private static string MakeIntermdeiateMove(Common.Moves lastMove, int gamesPlayed)
         {
-            return Common.Moves.Rock.ToString();
+            string moveToReturn;
+
+            switch (lastMove)
+            {
+                case Common.Moves.Rock:
+                    moveToReturn = "";
+                    break;
+                case Common.Moves.Paper:
+                    moveToReturn = "";
+                    break;
+                case Common.Moves.Scissors:
+                    moveToReturn = "";
+                    break;
+                default:
+                    moveToReturn = MakeRandomMove();
+                    break;
+            }
+
+            return moveToReturn;
         }
 
-        private static string MakeAdvancedMove(Common.Moves lastMove)
+        private static string MakeAdvancedMove(Common.Moves lastMove, int gamesPlayed)
         {
-            return Common.Moves.Rock.ToString();
+            string moveToReturn;
+
+            switch (lastMove)
+            {
+                case Common.Moves.Rock:
+                    moveToReturn = "";
+                    break;
+                case Common.Moves.Paper:
+                    moveToReturn = "";
+                    break;
+                case Common.Moves.Scissors:
+                    moveToReturn = "";
+                    break;
+                default:
+                    moveToReturn = MakeRandomMove();
+                    break;
+            }
+
+            return moveToReturn;
         }
     }
 }

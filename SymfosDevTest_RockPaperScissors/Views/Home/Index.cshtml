@@ -49,6 +49,8 @@
         let drawNum = 0;
         let lossNum = 0;
 
+        let gamesPlayed = 0;
+
         $("#newGame").click(function (event) {
             difficulty = $("#difficulty").val();
             playMode = $("#playMode").val();
@@ -85,6 +87,8 @@
             matchResult = "@Common.Result.Undecided.ToString()";
             $("#matchResult").html("@Common.Result.Undecided.ToString()");
 
+            gamesPlayed = 0;
+
         });
 
         $("#select-@Common.Moves.Rock.ToString()").click(function (event) {
@@ -107,10 +111,11 @@
                 $("#selectedMoveP1").html("Hey! You need to make a move.");
             }
             else {
+                gamesPlayed++;
                 $.ajax({
                     url: "@Url.Action("MakeMove", "Home")",
                     type: "POST",
-                    data: { lastMoveP1: lastMoveP1, lastMoveP2: lastMoveP2, difficulty: difficulty, playMode: playMode },
+                    data: { lastMoveP1: lastMoveP1, lastMoveP2: lastMoveP2, gamesPlayed: gamesPlayed, difficulty: difficulty, playMode: playMode },
                     success: function (response) {
                         if (playMode === "@Common.PlayMode.PlayerVComputer.ToString()") {
                             selectedMoveP2 = response.p2Move;

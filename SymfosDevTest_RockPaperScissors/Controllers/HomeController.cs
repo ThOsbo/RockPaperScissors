@@ -24,7 +24,7 @@ namespace SymfosDevTest_RockPaperScissors.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> MakeMove(string lastMoveP1, string lastMoveP2, string difficulty, string playMode)
+        public async Task<JsonResult> MakeMove(string lastMoveP1, string lastMoveP2, int gamesPlayed, string difficulty, string playMode)
         {
             string p1Move = "";
             string p2Move = "";
@@ -36,11 +36,11 @@ namespace SymfosDevTest_RockPaperScissors.Controllers
                 switch (playModeEnumValue)
                 {
                     case Common.PlayMode.PlayerVComputer:
-                        p2Move = PlayGame.MakeMove(lastMoveP1, difficulty).ToString();
+                        p2Move = PlayGame.MakeMove(lastMoveP1, gamesPlayed, difficulty).ToString();
                         break;
                     case Common.PlayMode.ComputerVComputer:
-                        p1Move = PlayGame.MakeMove(lastMoveP2, difficulty).ToString();
-                        p2Move = PlayGame.MakeMove(lastMoveP1, difficulty).ToString();
+                        p1Move = PlayGame.MakeMove(lastMoveP2, gamesPlayed, difficulty).ToString();
+                        p2Move = PlayGame.MakeMove(lastMoveP1, gamesPlayed, difficulty).ToString();
                         break;
                     default:
                         break;
