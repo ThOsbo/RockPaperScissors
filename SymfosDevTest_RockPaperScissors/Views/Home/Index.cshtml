@@ -125,6 +125,9 @@
 
                         CheckResults();
                         DeclareResult();
+                        if (lastMoveP2 != "") {
+                            UpdateStats();
+                        }
 
                         lastMoveP1 = selectedMoveP1;
                         lastMoveP2 = selectedMoveP2;
@@ -192,6 +195,24 @@
                 lossNum++;
                 $("#lossNum").html(lossNum.toString());
             }
+        }
+
+        function UpdateStats() {
+            let tableCellId = `#stats-${difficulty}-${playMode}-${selectedMoveP1}-${lastMoveP2}`;
+
+            let gamesPlayed = $(tableCellId).data("games");;
+            let numWins = $(tableCellId).data("wins");
+
+            gamesPlayed++;
+
+            if (matchResult === "@Common.Result.Win.ToString()") {
+                numWins++;
+            }
+
+            $(tableCellId).data("games", gamesPlayed);
+            $(tableCellId).data("wins", numWins);
+
+            $(tableCellId).html(`${numWins / gamesPlayed * 100}%`);
         }
     </script>
 }
