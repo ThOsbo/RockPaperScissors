@@ -96,29 +96,34 @@
         });
 
         $("#makeMove").click(function (event) {
-            $.ajax({
-                url: "@Url.Action("MakeMove", "Home")",
-                type: "POST",
-                data: { lastMoveP1: lastMoveP1, lastMoveP2: lastMoveP2, difficulty: difficulty, playMode: playMode },
-                success: function (response) {
-                    if (playMode === "@Common.PlayMode.PlayerVComputer.ToString()") {
-                        selectedMoveP2 = response.p2Move;
-                        $("#selectedMoveP2").html(response.p2Move);
-                    }
-                    else {
-                        selectedMoveP1 = response.p1Move;
-                        $("#selectedMoveP1").html(response.p1Move);
-                        selectedMoveP2 = response.p2Move;
-                        $("#selectedMoveP2").html(response.p2Move);
-                    }
+            if (playMode === "@Common.PlayMode.PlayerVComputer.ToString()" && selectedMoveP1 === "") {
+                $("#selectedMoveP1").html("Hey! You need to make a move.");
+            }
+            else {
+                $.ajax({
+                    url: "@Url.Action("MakeMove", "Home")",
+                    type: "POST",
+                    data: { lastMoveP1: lastMoveP1, lastMoveP2: lastMoveP2, difficulty: difficulty, playMode: playMode },
+                    success: function (response) {
+                        if (playMode === "@Common.PlayMode.PlayerVComputer.ToString()") {
+                            selectedMoveP2 = response.p2Move;
+                            $("#selectedMoveP2").html(response.p2Move);
+                        }
+                        else {
+                            selectedMoveP1 = response.p1Move;
+                            $("#selectedMoveP1").html(response.p1Move);
+                            selectedMoveP2 = response.p2Move;
+                            $("#selectedMoveP2").html(response.p2Move);
+                        }
 
-                    CheckResults();
-                    DeclareResult();
+                        CheckResults();
+                        DeclareResult();
 
-                    lastMoveP1 = selectedMoveP1;
-                    lastMoveP2 = selectedMoveP2;
-                }
-            })
+                        lastMoveP1 = selectedMoveP1;
+                        lastMoveP2 = selectedMoveP2;
+                    }
+                })
+            }
         });
 
         function CheckResults() {
