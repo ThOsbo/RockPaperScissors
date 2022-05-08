@@ -36,6 +36,12 @@
         let selectedMoveP1 = "";
         let selectedMoveP2 = "";
 
+        let matchResult = "";
+
+        let winNum = 0;
+        let drawNum = 0;
+        let lossNum = 0;
+
         $("#newGame").click(function (event) {
             difficulty = $("#difficulty").val();
             playMode = $("#playMode").val();
@@ -52,9 +58,16 @@
             $("#currPlayMode").html(playMode.toString());
             $("#currDifficulty").html(difficulty.toString());
 
+            winNum = 0;
+            drawNum = 0;
+            lossNum = 0;
+
             $("#winNum").html("0");
             $("#drawNum").html("0");
             $("#lossNum").html("0");
+
+            $("#selectedMoveP1").html("");
+            $("#selectedMoveP2").html("");
         });
 
         $("#select-@Common.Moves.Rock.ToString()").click(function (event) {
@@ -78,10 +91,82 @@
                 type: "POST",
                 data: { lastMoveP1: lastMoveP1, lastMoveP2: lastMoveP2, difficulty: difficulty, playMode: playMode },
                 success: function (response) {
-                    lastMoveP1 = response.p1Move;
-                    lastMoveP2 = response.p2Move;
+                    if (playMode === "@Common.PlayMode.PlayerVComputer.ToString()") {
+                        selectedMoveP2 = response.p2Move;
+                        $("#selectedMoveP2").html(response.p2Move);
+                    }
+                    else {
+                        selectedMoveP1 = response.p1Move;
+                        $("#selectedMoveP1").html(response.p1Move);
+                        selectedMoveP2 = response.p2Move;
+                        $("#selectedMoveP2").html(response.p2Move);
+                    }
+
+                    CheckResults();
+                    DeclareResult();
                 }
             })
         });
+
+        function CheckResults() {
+            switch (selectedMoveP1) {
+                case "@Common.Moves.Rock.ToString()":
+                    switch (selectedMoveP2) {
+                        case "@Common.Moves.Rock.ToString()":
+                            matchResult = "@Common.Result.Draw.ToString()";
+                            break;
+                        case "@Common.Moves.Paper.ToString()":
+                            matchResult = "@Common.Result.Loss.ToString()";
+                            break;
+                        case "@Common.Moves.Scissors.ToString()":
+                            matchResult = "@Common.Result.Win.ToString()";
+                            break;
+                    }
+                    break;
+                case "@Common.Moves.Paper.ToString()":
+                    switch (selectedMoveP2) {
+                        case "@Common.Moves.Rock.ToString()":
+                            matchResult = "@Common.Result.Win.ToString()";
+                            break;
+                        case "@Common.Moves.Paper.ToString()":
+                            matchResult = "@Common.Result.Draw.ToString()";
+                            break;
+                        case "@Common.Moves.Scissors.ToString()":
+                            matchResult = "@Common.Result.Loss.ToString()";
+                            break;
+                    }
+                    break;
+                case "@Common.Moves.Scissors.ToString()":
+                    switch (selectedMoveP2) {
+                        case "@Common.Moves.Rock.ToString()":
+                            matchResult = "@Common.Result.Loss.ToString()";
+                            break;
+                        case "@Common.Moves.Paper.ToString()":
+                            matchResult = "@Common.Result.Win.ToString()";
+                            break;
+                        case "@Common.Moves.Scissors.ToString()":
+                            matchResult = "@Common.Result.Draw.ToString()";
+                            break;
+                    }
+                    break;
+            }
+        }
+
+        function DeclareResult() {
+            $("#matchResult").html(matchResult);
+
+            if (matchResult === "@Common.Result.Win.ToString()") {
+                winNum++;
+                $("#winNum").html(winNum.toString());
+            }
+            else if (matchResult === "@Common.Result.Draw.ToString()") {
+                drawNum++;
+                $("#drawNum").html(drawNum.toString());
+            }
+            else if (matchResult === "@Common.Result.Loss.ToString()") {
+                lossNum++;
+                $("#lossNum").html(lossNum.toString());
+            }
+        }
     </script>
 }

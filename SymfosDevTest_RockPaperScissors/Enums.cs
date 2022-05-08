@@ -25,6 +25,13 @@ namespace Common
         Scissors
     }
 
+    public enum Result
+    {
+        Win,
+        Draw,
+        Loss
+    }
+
     public class Enum
     {
         public static bool TryGetEnum<T>(string value, out T enumValue)
