@@ -217,7 +217,7 @@
             $(tableCellId).data("games", gamesPlayed);
             $(tableCellId).data("wins", numWins);
 
-            $(tableCellId).html(`${numWins / gamesPlayed * 100}%`);
+            $(tableCellId).html(`${(numWins / gamesPlayed * 100).toFixed(2)}%`);
         }
     </script>
 }
