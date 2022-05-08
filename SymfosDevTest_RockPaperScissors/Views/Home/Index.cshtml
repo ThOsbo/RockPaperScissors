@@ -205,19 +205,19 @@
         function UpdateStats() {
             let tableCellId = `#stats-${difficulty}-${playMode}-${selectedMoveP1}-${lastMoveP2}`;
 
-            let gamesPlayed = $(tableCellId).data("games");;
-            let numWins = $(tableCellId).data("wins");
+            let cellGamesPlayed = $(tableCellId).data("games");;
+            let cellNumWins = $(tableCellId).data("wins");
 
-            gamesPlayed++;
+            cellGamesPlayed++;
 
             if (matchResult === "@Common.Result.Win.ToString()") {
-                numWins++;
+                cellNumWins++;
             }
 
-            $(tableCellId).data("games", gamesPlayed);
-            $(tableCellId).data("wins", numWins);
+            $(tableCellId).data("games", cellGamesPlayed);
+            $(tableCellId).data("wins", cellNumWins);
 
-            $(tableCellId).html(`${(numWins / gamesPlayed * 100).toFixed(2)}%`);
+            $(tableCellId).html(`${(cellNumWins / cellGamesPlayed * 100).toFixed(2)}%`);
         }
     </script>
 }
