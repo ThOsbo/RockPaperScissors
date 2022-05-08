@@ -27,21 +27,30 @@ namespace Common
 
     public class Enum
     {
-        public static T GetEnum<T>(string value)
+        public static bool TryGetEnum<T>(string value, out T enumValue)
         {
             //Converts a string to an enum
-            T enumValue = default(T);
+            bool isSuccess = false;
+            enumValue = default(T);
 
-            foreach (T item in System.Enum.GetValues(typeof(T)))
+            try
             {
-                if (item.ToString() == value)
+                foreach (T item in System.Enum.GetValues(typeof(T)))
                 {
-                    enumValue = item;
-                    break;
+                    if (item.ToString() == value)
+                    {
+                        enumValue = item;
+                        isSuccess = true;
+                        break;
+                    }
                 }
             }
+            catch (Exception exception)
+            {
 
-            return enumValue;
+            }
+
+            return isSuccess;
         }
     }
     
