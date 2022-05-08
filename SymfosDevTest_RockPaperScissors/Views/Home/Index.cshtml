@@ -68,6 +68,12 @@
 
             $("#selectedMoveP1").html("");
             $("#selectedMoveP2").html("");
+
+            selectedMoveP1 = "";
+            selectedMoveP2 = "";
+
+            lastMoveP1 = "";
+            lastMoveP2 = "";
         });
 
         $("#select-@Common.Moves.Rock.ToString()").click(function (event) {
@@ -104,6 +110,9 @@
 
                     CheckResults();
                     DeclareResult();
+
+                    lastMoveP1 = selectedMoveP1;
+                    lastMoveP2 = selectedMoveP2;
                 }
             })
         });
