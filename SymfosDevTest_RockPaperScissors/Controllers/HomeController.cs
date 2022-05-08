@@ -26,25 +26,34 @@ namespace SymfosDevTest_RockPaperScissors.Controllers
         [HttpPost]
         public async Task<JsonResult> MakeMove(string lastMoveP1, string lastMoveP2, string difficulty, string playMode)
         {
-            Common.Moves p1Move = Common.Moves.Rock;
-            Common.Moves p2Move = Common.Moves.Rock;
+            string p1Move = "";
+            string p2Move = "";
 
-            Common.PlayMode playModeEnumType = Common.Enum.GetEnum<Common.PlayMode>(playMode);
+            Common.PlayMode playModeEnumValue;
 
-            switch (playModeEnumType)
+            if (Common.Enum.TryGetEnum(playMode, out playModeEnumValue))
             {
-                case Common.PlayMode.PlayerVComputer:
-                    p2Move = PlayGame.MakeMove(lastMoveP1, difficulty);
-                    break;
-                case Common.PlayMode.ComputerVComputer:
-                    p1Move = PlayGame.MakeMove(lastMoveP2, difficulty);
-                    p2Move = PlayGame.MakeMove(lastMoveP1, difficulty);
-                    break;
-                default:
-                    break;
+                switch (playModeEnumValue)
+                {
+                    case Common.PlayMode.PlayerVComputer:
+                        p2Move = PlayGame.MakeMove(lastMoveP1, difficulty).ToString();
+                        break;
+                    case Common.PlayMode.ComputerVComputer:
+                        p1Move = PlayGame.MakeMove(lastMoveP2, difficulty).ToString();
+                        p2Move = PlayGame.MakeMove(lastMoveP1, difficulty).ToString();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                //returns a random move if an invalid play mode is passed
+                p1Move = PlayGame.MakeRandomMove();
+                p2Move = PlayGame.MakeRandomMove();
             }
 
-            return Json(new { p1Move = p1Move.ToString(), p2Move = p2Move.ToString() });
+            return Json(new { p1Move = p1Move, p2Move = p2Move });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
