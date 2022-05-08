@@ -48,7 +48,11 @@ namespace SymfosDevTest_RockPaperScissors
 
         private static string MakeBegginerMove(Common.Moves lastMove)
         {
-            //Strategy: returns the move that would beat the last move.
+            /*
+             * Strategy:
+             * returns the move that would beat the opponents last move.
+             */
+
             string moveToReturn;
 
             switch (lastMove)
@@ -72,18 +76,36 @@ namespace SymfosDevTest_RockPaperScissors
 
         private static string MakeIntermdeiateMove(Common.Moves lastMove, int gamesPlayed)
         {
+            /*
+             * Strategy:
+             * returns the move that would beat the opponents last move every odd turn, 
+             * returns the same move as the opponents last move every even turn
+             */
+
             string moveToReturn;
 
             switch (lastMove)
             {
                 case Common.Moves.Rock:
-                    moveToReturn = "";
+                    moveToReturn = Common.Moves.Paper.ToString();
+                    if (gamesPlayed % 2 == 0)
+                    {
+                        moveToReturn = Common.Moves.Rock.ToString();
+                    }
                     break;
                 case Common.Moves.Paper:
-                    moveToReturn = "";
+                    moveToReturn = Common.Moves.Scissors.ToString();
+                    if (gamesPlayed % 2 == 0)
+                    {
+                        moveToReturn = Common.Moves.Paper.ToString();
+                    }
                     break;
                 case Common.Moves.Scissors:
-                    moveToReturn = "";
+                    moveToReturn = Common.Moves.Rock.ToString();
+                    if (gamesPlayed % 2 == 0)
+                    {
+                        moveToReturn = Common.Moves.Scissors.ToString();
+                    }
                     break;
                 default:
                     moveToReturn = MakeRandomMove();
