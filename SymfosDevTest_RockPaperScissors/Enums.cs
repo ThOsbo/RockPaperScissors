@@ -7,7 +7,7 @@ namespace Common
 {
     public enum Difficulty
     {
-        Begginer,
+        Beginner,
         Intermediate,
         Advanced
     }
